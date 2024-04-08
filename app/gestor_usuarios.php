@@ -11,18 +11,17 @@ function obtenerDatosUsuario($username) {
     // Conexión a la base de datos
     $con = mysqli_connect($DB_SERVER, $DB_USER, $DB_PASS, $DB_DATABASE);
     if (mysqli_connect_errno()) {
-        echo 'Error de conexión: ' . mysqli_connect_error();
-        exit();
+        return array("error" => "Error de conexión: " . mysqli_connect_error());
     }
 
     // Obtener datos del usuario
     $query = "SELECT * FROM usuarios WHERE username = '$username'";
     $result = mysqli_query($con, $query);
-    if(mysqli_query($con, $query)) {
-        // Devolver los datos
-        echo json_encode($result);
+    if ($result) {
+        $userData = mysqli_fetch_assoc($result);
+        return $userData;
     } else {
-        echo 'Error al obtener datos de usuario: ' . mysqli_error($con);
+        return array("error" => "Error al obtener datos de usuario: " . mysqli_error($con));
     }
 }
 
@@ -36,21 +35,17 @@ function realizarLogin($username, $psw) {
     // Conexión a la base de datos
     $con = mysqli_connect($DB_SERVER, $DB_USER, $DB_PASS, $DB_DATABASE);
     if (mysqli_connect_errno()) {
-        echo 'Error de conexión: ' . mysqli_connect_error();
-        exit();
+        return array("error" => "Error de conexión: " . mysqli_connect_error());
     }
 
     // Verificar si las credenciales son válidas
     $query = "SELECT * FROM usuarios WHERE username = '$username' AND psw = '$psw'";
     $result = mysqli_query($con, $query);
-    if(mysqli_num_rows($result) > 0) {
-        $ok = true;
+    if (mysqli_num_rows($result) > 0) {
+        return true;
     } else {
-        $ok = false;
+        return false;
     }
-
-    // Devolver confirmación
-    echo json_encode($ok);
 }
 
 function registrarNuevoUsuario($username, $psw, $name, $email) {
@@ -63,26 +58,23 @@ function registrarNuevoUsuario($username, $psw, $name, $email) {
     // Conexión a la base de datos
     $con = mysqli_connect($DB_SERVER, $DB_USER, $DB_PASS, $DB_DATABASE);
     if (mysqli_connect_errno()) {
-        echo 'Error de conexión: ' . mysqli_connect_error();
-        exit();
+        return array("error" => "Error de conexión: " . mysqli_connect_error());
     }
 
     // Verificar si el usuario ya existe
     $query = "SELECT * FROM usuarios WHERE username = '$username'";
     $result = mysqli_query($con, $query);
-    if(mysqli_num_rows($result) > 0) {
-        $ok = 'Ya existe un usuario con este username';
+    if (mysqli_num_rows($result) > 0) {
+        return "Ya existe un usuario con este username";
     } else {
         // Insertar nuevo usuario
         $query = "INSERT INTO usuarios (username, psw, name, email) VALUES ('$username', '$psw', '$name', '$email')";
-        if(mysqli_query($con, $query)) {
-            $ok = true;
+        if (mysqli_query($con, $query)) {
+            return true;
         } else {
-            echo 'Error al registrar usuario: ' . mysqli_error($con);
-            $ok = false;
+            return array("error" => "Error al registrar usuario: " . mysqli_error($con));
         }
     }
-
-    // Devolver confirmación
-    echo json_encode($ok);
 }
+?>
+
