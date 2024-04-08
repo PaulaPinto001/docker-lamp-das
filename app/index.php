@@ -1,31 +1,26 @@
 <?php
-  echo '<h1>Yeah, it works!<h1>';
-  // phpinfo();
-  $hostname = "db";
-  $username = "admin";
-  $password = "test";
-  $db = "database";
+echo '<h1>Yeah, it works!<h1>';
+// phpinfo();
+$hostname = "db";
+$username = "admin";
+$password = "test";
+$db = "database";
 
-  $conn = mysqli_connect($hostname,$username,$password,$db);
-  if ($conn->connect_error) {
+$conn = mysqli_connect($hostname, $username, $password, $db);
+if ($conn->connect_error) {
     die("Database connection failed: " . $conn->connect_error);
-  }
+}
 
-
-
-$query = mysqli_query($conn, "SELECT * FROM usuarios")
-   or die (mysqli_error($conn));
+$query = mysqli_query($conn, "SELECT * FROM usuarios") or die(mysqli_error($conn));
 
 while ($row = mysqli_fetch_array($query)) {
-  echo
-   "<tr>
+    echo
+        "<tr>
     <td>{$row['username']}</td>
     <td>{$row['password']}</td>
     <td>{$row['name']}</td>
     <td>{$row['email']}</td>
    </tr>";
-   
-
 }
 
 // Obtener solicitud y parametros
@@ -38,7 +33,7 @@ switch ($params[0]) {
     case 'usuarios':
         require_once 'gestor_usuarios.php';
         // Manejar solicitudes POST para usuarios
-        //Más adelante podrían implementarse GET, PUT y DELETE
+        // Más adelante podrían implementarse GET, PUT y DELETE
 
         if ($method === 'POST') { // opciones: /login (body: user, psw), register (body: user, psw, name, email) o /getData (body: user)
             $operacion = $params[1];
@@ -48,7 +43,6 @@ switch ($params[0]) {
 
             // Decodificar el cuerpo de la solicitud JSON en un array asociativo
             $array_datos = json_decode($cuerpo_solicitud, true);
-
 
             if ($operacion === 'login') {
                 $username = $array_datos['username'];
@@ -64,6 +58,7 @@ switch ($params[0]) {
                 $email = $array_datos['email'];
                 $ok = obtenerDatosUsuario($username, $psw, $name, $email);
             }
+        }
         break;
 
     case 'fcm':
@@ -78,5 +73,5 @@ switch ($params[0]) {
         http_response_code(404);
         echo json_encode(array("mensaje" => "Ruta no encontrada"));
 }
-
 ?>
+
