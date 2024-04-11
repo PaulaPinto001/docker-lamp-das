@@ -1,59 +1,45 @@
 <?php
 // gestor_fcm.php
 
-// Incluir la biblioteca de Firebase JWT
-require_once 'vendor/autoload.php';
-
-use \Firebase\JWT\JWT;
-
 // Variables para autenticación
-$firebaseApiKey = 'AAAARENp08k:APA91bGE5sZYLOyJSwtuEDZ-FGhGBO_OnW2tXtA8NwPcQ2oSxYE549M8bdy481P5EcXHEZ4RYrIZEMr74poLxr3woOpPgIs2VdgzfEEShjAAk57vErd-PhAjWE5mllmq00KfJQkm8zGd';
+$claveServer = 'AAAARENp08k:APA91bGE5sZYLOyJSwtuEDZ-FGhGBO_OnW2tXtA8NwPcQ2oSxYE549M8bdy481P5EcXHEZ4RYrIZEMr74poLxr3woOpPgIs2VdgzfEEShjAAk57vErd-PhAjWE5mllmq00KfJQkm8zGd';
 $projectId = 'dasentrega2';
 
-// Crear el token de autenticación
-$token = [
-    'iss' => 'firebase-adminsdk-' . $projectId . '@' . $projectId . '.iam.gserviceaccount.com',
-    'sub' => 'firebase-adminsdk-' . $projectId . '@appspot.gserviceaccount.com',
-    'aud' => 'https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit',
-    'iat' => time(),
-    'exp' => time() + 3600,
-    'uid' => null
-];
+$cabecera= array(
+    'Authorization:' $claveServer,
+    'Content-Type: application/json'
+);
 
-$jwt = JWT::encode($token, $firebaseApiKey);
+$msg = array (
+    'data' => array (
+        "mensaje" => "Este es mi mensaje",
+        "fecha" => "31/03/2020"
+    ),
+    'notification' => array (
+        'body' => 'Notificación enviada desde servidor ',
+        'title' => 'FCM notif'
+    )
+);
+$msgJSON= json_encode ( $msg);
 
-// Datos del mensaje FCM
-$mensage = [
-    'message' => [
-        'notification' => [
-            'title' => 'Este es un mensaje de FCM',
-            'body' => 'Hola'
-        ]
-    ]
-];
+$ch = curl_init(); #inicializar el handler de curl
+#indicar el destino de la petición, el servicio FCM de google
+curl_setopt( $ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+#indicar que la conexión es de tipo POST
+curl_setopt( $ch, CURLOPT_POST, true );
+#agregar las cabeceras
+curl_setopt( $ch, CURLOPT_HTTPHEADER, $cabecera);
+#Indicar que se desea recibir la respuesta a la conexión en forma de string
+curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+#agregar los datos de la petición en formato JSON
+curl_setopt( $ch, CURLOPT_POSTFIELDS, $msgJSON );
+#ejecutar la llamada
+$resultado= curl_exec( $ch );
+#cerrar el handler de curl
+curl_close( $ch );
 
-// URL de la API de FCM
-$url = 'https://fcm.googleapis.com/v1/projects/' . $projectId . '/messages:send';
-
-// Configurar la solicitud HTTP
-$options = [
-    'http' => [
-        'header' => "Content-Type: application/json\r\n" .
-                    "Authorization: Bearer $jwt\r\n",
-        'method' => 'POST',
-        'content' => json_encode($mensage)
-    ]
-];
-
-// Realizar la solicitud HTTP
-$context = stream_context_create($options);
-$result = file_get_contents($url, false, $context);
-
-// Manejar la respuesta
-if ($result === false) {
-    return "Error al enviar el mensaje: " . error_get_last()['message'];
-} else {
-    return "Mensaje enviado correctamente";
+if (curl_errno($ch)) {
+    print curl_error($ch);
 }
-
+echo $resultado;
 ?>
