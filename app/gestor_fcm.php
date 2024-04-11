@@ -1,12 +1,10 @@
 <?php
-// gestor_fcm.php
-
 // Variables para autenticación
 $claveServer = 'AAAARENp08k:APA91bGE5sZYLOyJSwtuEDZ-FGhGBO_OnW2tXtA8NwPcQ2oSxYE549M8bdy481P5EcXHEZ4RYrIZEMr74poLxr3woOpPgIs2VdgzfEEShjAAk57vErd-PhAjWE5mllmq00KfJQkm8zGd';
 $projectId = 'dasentrega2';
 
 $cabecera= array(
-    'Authorization:' $claveServer,
+    'Authorization: key=' . $claveServer,
     'Content-Type: application/json'
 );
 
@@ -35,11 +33,13 @@ curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 curl_setopt( $ch, CURLOPT_POSTFIELDS, $msgJSON );
 #ejecutar la llamada
 $resultado= curl_exec( $ch );
+
+if (curl_errno($ch)) {
+    echo 'Error: ' . curl_error($ch);
+}
 #cerrar el handler de curl
 curl_close( $ch );
 
-if (curl_errno($ch)) {
-    print curl_error($ch);
-}
 echo $resultado;
 ?>
+
