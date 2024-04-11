@@ -61,13 +61,6 @@ switch ($params[0]) {
         }
         break;
 
-    case 'fcm':
-        require_once 'gestor_fcm.php';
-
-        // Manejar solicitudes relacionadas con FCM
-        enviarMensaje();
-        break;
-
     default:
         // Si la ruta no coincide con ninguna de las rutas definidas, devolver un error
         http_response_code(404);
