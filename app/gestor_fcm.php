@@ -5,10 +5,15 @@ $projectId = 'dasentrega2';
 //Pegar token desde log
 $deviceToken = 'eIMAuqSTToepZh3-4L8aVV:APA91bHgsjPrZjDAq-NjV_vA3k3KXyuqPbgtCengaanMBlMyz-Ag3_-wYpMYdgcQ4SQNUJwRwLkTZGHx7lCjw4FLtNMSP-8ZSUNtXligMA9CQzrRm-0XkZ1-ngcLfViBm59xnyQB5xpe'
 
-$cabecera= array(
-    'Authorization: key=' . $claveServer,
-    'Content-Type: application/json'
-);
+
+function crearCabecera($claveServer) {
+    return array(
+        'Authorization: key=' . $claveServer,
+        'Content-Type: application/json'
+    );
+}
+
+$cabecera= crearCabecera($claveServer);
 
 $msg = array (
     'to' => $deviceToken,
