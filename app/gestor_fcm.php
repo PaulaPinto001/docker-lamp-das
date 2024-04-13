@@ -2,6 +2,8 @@
 // Variables para autenticación
 $claveServer = 'AAAARENp08k:APA91bGE5sZYLOyJSwtuEDZ-FGhGBO_OnW2tXtA8NwPcQ2oSxYE549M8bdy481P5EcXHEZ4RYrIZEMr74poLxr3woOpPgIs2VdgzfEEShjAAk57vErd-PhAjWE5mllmq00KfJQkm8zGd';
 $projectId = 'dasentrega2';
+//Pegar token desde log
+$deviceToken = 'eIMAuqSTToepZh3-4L8aVV:APA91bHgsjPrZjDAq-NjV_vA3k3KXyuqPbgtCengaanMBlMyz-Ag3_-wYpMYdgcQ4SQNUJwRwLkTZGHx7lCjw4FLtNMSP-8ZSUNtXligMA9CQzrRm-0XkZ1-ngcLfViBm59xnyQB5xpe'
 
 $cabecera= array(
     'Authorization: key=' . $claveServer,
@@ -9,6 +11,7 @@ $cabecera= array(
 );
 
 $msg = array (
+    'to' => $deviceToken,
     'data' => array (
         "mensaje" => "Este es mi mensaje",
         "fecha" => "31/03/2020"
