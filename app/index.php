@@ -1,5 +1,4 @@
 <?php
-echo '<h1>Yeah, it works!<h1>';
 // phpinfo();
 $hostname = "db";
 $username = "admin";
@@ -48,15 +47,18 @@ switch ($params[0]) {
                 $username = $array_datos['username'];
                 $psw = $array_datos['psw'];
                 $ok = realizarLogin($username, $psw);
+                echo $ok;
             } elseif ($operacion === 'getData') {
                 $username = $array_datos['username'];
                 $datos = obtenerDatosUsuario($username);
+                echo $datos;
             } elseif ($operacion === 'register') {
                 $username = $array_datos['username'];
                 $psw = $array_datos['psw'];
                 $name = $array_datos['name'];
                 $email = $array_datos['email'];
                 $ok = obtenerDatosUsuario($username, $psw, $name, $email);
+                echo $ok;
             }
         }
         break;
