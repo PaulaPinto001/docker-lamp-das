@@ -13,15 +13,11 @@ switch ($params[0]) {
         // Manejar solicitudes POST para usuarios
         // Más adelante podrían implementarse GET, PUT y DELETE
 
-        if ($method === 'POST') { // opciones: /login (body: user, psw), register (body: user, psw, name, email) o /getData (body: user)
+        if ($method === 'POST') {
+            // Obtener el cuerpo de la solicitud POST (datos de formulario)
+            $array_datos = $_POST;
+
             $operacion = $params[1];
-
-            // Obtener el cuerpo de la solicitud POST
-            $cuerpo_solicitud = file_get_contents('php://input');
-
-            // Decodificar el cuerpo de la solicitud JSON en un array asociativo
-            $array_datos = json_decode($cuerpo_solicitud, true);
-
             if ($operacion === 'login') {
                 $username = $array_datos['username'];
                 $psw = $array_datos['psw'];
@@ -38,7 +34,15 @@ switch ($params[0]) {
                 $email = $array_datos['email'];
                 $ok = obtenerDatosUsuario($username, $psw, $name, $email);
                 echo $ok;
+            } else {
+                // Si la operación no es reconocida, devolver un error
+                http_response_code(404);
+                echo json_encode(array("mensaje" => "Operación no válida"));
             }
+        } else {
+            // Si el método no es POST, devolver un error
+            http_response_code(405); // Método no permitido
+            echo json_encode(array("mensaje" => "Método no permitido"));
         }
         break;
 
@@ -48,4 +52,5 @@ switch ($params[0]) {
         echo json_encode(array("mensaje" => "Ruta no encontrada"));
 }
 ?>
+
 
