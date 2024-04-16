@@ -34,6 +34,15 @@ CREATE TABLE `usuarios` (
   `email` VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `fotosPeliculas` (
+  `idPelicula` INT NOT NULL,
+  `user` VARCHAR(50) NOT NULL,
+  `path` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`idPelicula`, `user`),
+  FOREIGN KEY (`idPelicula`) REFERENCES `peliculas` (`idPelicula`),
+  FOREIGN KEY (`user`) REFERENCES `usuarios` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Volcado de datos para la tabla `usuarios`
 --

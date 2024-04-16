@@ -1,6 +1,28 @@
 <?php
 // gestor_usuarios.php
 
+$op = $_POST["op"];
+switch ($op) {
+    case "login":
+        $user = $_POST["username"];
+        $psw = $_POST["password"];
+        realizarLogin($user, $psw);
+        break;
+    case "register":
+        $user = $_POST["username"];
+        $psw = $_POST["password"];
+        $name = $_POST["name"];
+        $email = $_POST["email"];
+        registrarNuevoUsuario($user, $psw, $name, $email);
+        break;
+    case "getData":
+        $user = $_POST["username"];
+        obtenerDatosUsuario($user);
+        break;
+    default:
+        echo "Operación no valida";
+}
+
 function obtenerDatosUsuario($username) {
     // Conectar a la base de datos
     $DB_SERVER = "34.70.105.230";
