@@ -43,6 +43,11 @@ CREATE TABLE IF NOT EXISTS `fotosPeliculas` (
   FOREIGN KEY (`user`) REFERENCES `usuarios` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS `peliculas` (
+  `idPelicula` INT NOT NULL,
+  PRIMARY KEY (`idPelicula`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Volcado de datos para la tabla `usuarios`
 --
