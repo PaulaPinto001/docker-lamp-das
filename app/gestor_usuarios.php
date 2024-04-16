@@ -6,21 +6,21 @@ switch ($op) {
     case "login":
         $user = $_POST["username"];
         $psw = $_POST["password"];
-        realizarLogin($user, $psw);
+        echo json_encode(realizarLogin($user, $psw));
         break;
     case "register":
         $user = $_POST["username"];
         $psw = $_POST["password"];
         $name = $_POST["name"];
         $email = $_POST["email"];
-        registrarNuevoUsuario($user, $psw, $name, $email);
+        echo json_encode(registrarNuevoUsuario($user, $psw, $name, $email));
         break;
     case "getData":
         $user = $_POST["username"];
-        obtenerDatosUsuario($user);
+        echo json_encode(obtenerDatosUsuario($user));
         break;
     default:
-        echo "Operación no valida";
+        echo json_encode(array("error" => "Operación no válida"));
 }
 
 function obtenerDatosUsuario($username) {
@@ -41,7 +41,7 @@ function obtenerDatosUsuario($username) {
     $result = mysqli_query($con, $query);
     if ($result) {
         $userData = mysqli_fetch_assoc($result);
-        return $userData;
+        return array("success" => $userData);
     } else {
         return array("error" => "Error al obtener datos de usuario: " . mysqli_error($con));
     }
@@ -64,9 +64,9 @@ function realizarLogin($username, $psw) {
     $query = "SELECT * FROM usuarios WHERE username = '$username' AND psw = '$psw'";
     $result = mysqli_query($con, $query);
     if (mysqli_num_rows($result) > 0) {
-        return true;
+        return array("success" => "Inicio de sesión exitoso");
     } else {
-        return false;
+        return array("error" => "Credenciales inválidas");
     }
 }
 
@@ -87,16 +87,17 @@ function registrarNuevoUsuario($username, $psw, $name, $email) {
     $query = "SELECT * FROM usuarios WHERE username = '$username'";
     $result = mysqli_query($con, $query);
     if (mysqli_num_rows($result) > 0) {
-        return "Ya existe un usuario con este username";
+        return array("error" => "Ya existe un usuario con este username");
     } else {
         // Insertar nuevo usuario
         $query = "INSERT INTO usuarios (username, psw, name, email) VALUES ('$username', '$psw', '$name', '$email')";
         if (mysqli_query($con, $query)) {
-            return true;
+            return array("success" => "Usuario registrado correctamente");
         } else {
             return array("error" => "Error al registrar usuario: " . mysqli_error($con));
         }
     }
 }
+
 ?>
 

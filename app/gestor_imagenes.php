@@ -6,16 +6,16 @@ switch ($op) {
     case "getImg":
         $user = $_POST["username"];
         $id = $_POST["id"];
-        obtenerFoto($user, $id);
+        echo json_encode(obtenerFoto($user, $id));
         break;
     case "guardarRuta":
         $user = $_POST["username"];
         $path = $_POST["path"];
         $id = $_POST["id"];
-        guardarFoto($user, $path, $id);
+        echo json_encode(guardarFoto($user, $path, $id));
         break;
     default:
-        echo "Operación no valida";
+        echo json_encode(array("error" => "Operación no válida"));
 }
 
 function guardarFoto($user, $path, $idPeli) {
@@ -59,10 +59,9 @@ function obtenerFoto($user, $idPeli) {
     $result = mysqli_query($con, $query);
     if ($result && mysqli_num_rows($result) > 0) {
         $photoData = mysqli_fetch_assoc($result);
-        return $photoData;
+        return array("success" => $photoData);
     } else {
         return array("error" => "No se encontró la foto para el usuario y la película especificados");
     }
 }
-
 ?>
