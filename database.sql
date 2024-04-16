@@ -27,14 +27,14 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-CREATE TABLE `usuarios` (
+CREATE TABLE IF NOT EXISTS `usuarios` (
   `username` VARCHAR(50) NOT NULL,
   `psw` VARCHAR(100) NOT NULL,
   `name` VARCHAR(100) NOT NULL,
   `email` VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `fotosPeliculas` (
+CREATE TABLE IF NOT EXISTS `fotosPeliculas` (
   `idPelicula` INT NOT NULL,
   `user` VARCHAR(50) NOT NULL,
   `path` VARCHAR(255) NOT NULL,
