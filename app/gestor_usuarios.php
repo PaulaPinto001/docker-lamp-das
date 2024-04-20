@@ -40,7 +40,6 @@ function obtenerDatosUsuario($username) {
     $query = "SELECT name, email FROM usuarios WHERE username = '$username'";
     $result = mysqli_query($con, $query);
 
-    return json_encode("hola");
     if ($result) {
         $userData = mysqli_fetch_assoc($result);
         return array("success" => $userData);
@@ -65,6 +64,7 @@ function realizarLogin($username, $psw) {
     // Verificar si las credenciales son válidas
     $query = "SELECT * FROM usuarios WHERE username = '$username' AND psw = '$psw'";
     $result = mysqli_query($con, $query);
+    return json_encode("hola");
     if (mysqli_num_rows($result) > 0) {
         return array("success" => "Inicio de sesión exitoso");
     } else {
