@@ -4,7 +4,7 @@
 $op = $_POST["op"];
 switch ($op) {
     case "login":
-        echo "hola";
+        return json_encode("hola");
         $user = $_POST["username"];
         $psw = $_POST["password"];
         echo json_encode(realizarLogin($user, $psw));
