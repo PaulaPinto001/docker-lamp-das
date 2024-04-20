@@ -55,10 +55,10 @@ function realizarLogin($username, $psw) {
     $DB_PASS = "password";
     $DB_DATABASE = "nombreBD";
 
-    return json_encode("hola");
     // Conexión a la base de datos
     $con = mysqli_connect($DB_SERVER, $DB_USER, $DB_PASS, $DB_DATABASE);
     if (mysqli_connect_errno()) {
+        return "hola";
         return array("error" => "Error de conexion: " . mysqli_connect_error());
     }
 
