@@ -20,7 +20,7 @@ switch ($op) {
         echo json_encode(obtenerDatosUsuario($user));
         break;
     default:
-        echo json_encode(array("error" => "Operación no válida"));
+        echo json_encode(array("error" => "Operaciin no valida"));
 }
 
 function obtenerDatosUsuario($username) {
@@ -33,11 +33,11 @@ function obtenerDatosUsuario($username) {
     // Conexión a la base de datos
     $con = mysqli_connect($DB_SERVER, $DB_USER, $DB_PASS, $DB_DATABASE);
     if (mysqli_connect_errno()) {
-        return array("error" => "Error de conexión: " . mysqli_connect_error());
+        return array("error" => "Error de conexion: " . mysqli_connect_error());
     }
 
     // Obtener datos del usuario
-    $query = "SELECT * FROM usuarios WHERE username = '$username'";
+    $query = "SELECT name, email FROM usuarios WHERE username = '$username'";
     $result = mysqli_query($con, $query);
     if ($result) {
         $userData = mysqli_fetch_assoc($result);
@@ -57,7 +57,7 @@ function realizarLogin($username, $psw) {
     // Conexión a la base de datos
     $con = mysqli_connect($DB_SERVER, $DB_USER, $DB_PASS, $DB_DATABASE);
     if (mysqli_connect_errno()) {
-        return array("error" => "Error de conexión: " . mysqli_connect_error());
+        return array("error" => "Error de conexion: " . mysqli_connect_error());
     }
 
     // Verificar si las credenciales son válidas
@@ -66,7 +66,7 @@ function realizarLogin($username, $psw) {
     if (mysqli_num_rows($result) > 0) {
         return array("success" => "Inicio de sesión exitoso");
     } else {
-        return array("error" => "Credenciales inválidas");
+        return array("error" => "Credenciales invalidas");
     }
 }
 
@@ -80,7 +80,7 @@ function registrarNuevoUsuario($username, $psw, $name, $email) {
     // Conexión a la base de datos
     $con = mysqli_connect($DB_SERVER, $DB_USER, $DB_PASS, $DB_DATABASE);
     if (mysqli_connect_errno()) {
-        return array("error" => "Error de conexión: " . mysqli_connect_error());
+        return array("error" => "Error de conexion: " . mysqli_connect_error());
     }
 
     // Verificar si el usuario ya existe

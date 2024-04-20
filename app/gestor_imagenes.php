@@ -15,7 +15,7 @@ switch ($op) {
         echo json_encode(guardarFoto($user, $path, $id));
         break;
     default:
-        echo json_encode(array("error" => "Operación no válida"));
+        echo json_encode(array("error" => "Operacion no valida"));
 }
 
 function guardarFoto($user, $path, $idPeli) {
@@ -28,7 +28,7 @@ function guardarFoto($user, $path, $idPeli) {
     // Conexión a la base de datos
     $con = mysqli_connect($DB_SERVER, $DB_USER, $DB_PASS, $DB_DATABASE);
     if (mysqli_connect_errno()) {
-        return array("error" => "Error de conexión: " . mysqli_connect_error());
+        return array("error" => "Error de conexion: " . mysqli_connect_error());
     }
 
     // Insertar datos de la foto en la tabla fotosPeliculas
@@ -61,7 +61,7 @@ function obtenerFoto($user, $idPeli) {
         $photoData = mysqli_fetch_assoc($result);
         return array("success" => $photoData);
     } else {
-        return array("error" => "No se encontró la foto para el usuario y la película especificados");
+        return array("error" => "No se encontro la foto para el usuario y la pelicula especificados");
     }
 }
 ?>
