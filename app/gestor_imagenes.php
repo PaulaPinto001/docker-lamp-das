@@ -20,10 +20,10 @@ switch ($op) {
 
 function guardarFoto($user, $path, $idPeli) {
     // Conectar a la base de datos
-    $DB_SERVER = "34.70.105.230";
-    $DB_USER = "usuario";
-    $DB_PASS = "password";
-    $DB_DATABASE = "nombreBD";
+    $DB_SERVER = "db";
+    $DB_USER = "admin";
+    $DB_PASS = "test";
+    $DB_DATABASE = "database";
 
     // Conexión a la base de datos
     $con = mysqli_connect($DB_SERVER, $DB_USER, $DB_PASS, $DB_DATABASE);
@@ -43,10 +43,10 @@ function guardarFoto($user, $path, $idPeli) {
 
 function obtenerFoto($user, $idPeli) {
     // Conectar a la base de datos
-    $DB_SERVER = "34.70.105.230";
-    $DB_USER = "usuario";
-    $DB_PASS = "password";
-    $DB_DATABASE = "nombreBD";
+    $DB_SERVER = "db";
+    $DB_USER = "admin";
+    $DB_PASS = "test";
+    $DB_DATABASE = "database";
 
     // Conexión a la base de datos
     $con = mysqli_connect($DB_SERVER, $DB_USER, $DB_PASS, $DB_DATABASE);

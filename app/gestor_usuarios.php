@@ -25,10 +25,10 @@ switch ($op) {
 
 function obtenerDatosUsuario($username) {
     // Conectar a la base de datos
-    $DB_SERVER = "34.70.105.230";
-    $DB_USER = "usuario";
-    $DB_PASS = "password";
-    $DB_DATABASE = "nombreBD";
+    $DB_SERVER = "db";
+    $DB_USER = "admin";
+    $DB_PASS = "test";
+    $DB_DATABASE = "database";
 
     // Conexión a la base de datos
     $con = mysqli_connect($DB_SERVER, $DB_USER, $DB_PASS, $DB_DATABASE);
@@ -50,15 +50,14 @@ function obtenerDatosUsuario($username) {
 
 function realizarLogin($username, $psw) {
     // Conectar a la base de datos
-    $DB_SERVER = "34.70.105.230";
-    $DB_USER = "usuario";
-    $DB_PASS = "password";
-    $DB_DATABASE = "nombreBD";
+    $DB_SERVER = "db";
+    $DB_USER = "admin";
+    $DB_PASS = "test";
+    $DB_DATABASE = "database";
 
     // Conexión a la base de datos
     $con = mysqli_connect($DB_SERVER, $DB_USER, $DB_PASS, $DB_DATABASE);
     if (mysqli_connect_errno()) {
-        return "hola";
         return array("error" => "Error de conexion: " . mysqli_connect_error());
     }
 
@@ -74,10 +73,10 @@ function realizarLogin($username, $psw) {
 
 function registrarNuevoUsuario($username, $psw, $name, $email) {
     // Conectar a la base de datos
-    $DB_SERVER = "34.70.105.230";
-    $DB_USER = "usuario";
-    $DB_PASS = "password";
-    $DB_DATABASE = "nombreBD";
+    $DB_SERVER = "db";
+    $DB_USER = "admin";
+    $DB_PASS = "test";
+    $DB_DATABASE = "database";
 
     // Conexión a la base de datos
     $con = mysqli_connect($DB_SERVER, $DB_USER, $DB_PASS, $DB_DATABASE);
