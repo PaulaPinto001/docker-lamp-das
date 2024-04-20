@@ -4,7 +4,6 @@
 $op = $_POST["op"];
 switch ($op) {
     case "login":
-        return json_encode("hola");
         $user = $_POST["username"];
         $psw = $_POST["password"];
         echo json_encode(realizarLogin($user, $psw));
@@ -40,6 +39,8 @@ function obtenerDatosUsuario($username) {
     // Obtener datos del usuario
     $query = "SELECT name, email FROM usuarios WHERE username = '$username'";
     $result = mysqli_query($con, $query);
+
+    return json_encode("hola");
     if ($result) {
         $userData = mysqli_fetch_assoc($result);
         return array("success" => $userData);
