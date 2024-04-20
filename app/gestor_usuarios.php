@@ -20,7 +20,7 @@ switch ($op) {
         echo json_encode(obtenerDatosUsuario($user));
         break;
     default:
-        echo json_encode(array("error" => "Operaciin no valida"));
+        echo json_encode(array("error" => "Operacion no valida"));
 }
 
 function obtenerDatosUsuario($username) {
@@ -55,6 +55,7 @@ function realizarLogin($username, $psw) {
     $DB_PASS = "password";
     $DB_DATABASE = "nombreBD";
 
+    return json_encode("hola");
     // Conexión a la base de datos
     $con = mysqli_connect($DB_SERVER, $DB_USER, $DB_PASS, $DB_DATABASE);
     if (mysqli_connect_errno()) {
@@ -64,7 +65,6 @@ function realizarLogin($username, $psw) {
     // Verificar si las credenciales son válidas
     $query = "SELECT * FROM usuarios WHERE username = '$username' AND psw = '$psw'";
     $result = mysqli_query($con, $query);
-    return json_encode("hola");
     if (mysqli_num_rows($result) > 0) {
         return array("success" => "Inicio de sesión exitoso");
     } else {
