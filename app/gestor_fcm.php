@@ -3,7 +3,7 @@
 $claveServer = 'AAAARENp08k:APA91bGE5sZYLOyJSwtuEDZ-FGhGBO_OnW2tXtA8NwPcQ2oSxYE549M8bdy481P5EcXHEZ4RYrIZEMr74poLxr3woOpPgIs2VdgzfEEShjAAk57vErd-PhAjWE5mllmq00KfJQkm8zGd';
 $projectId = 'dasentrega2';
 //Pegar token desde log
-$deviceToken = 'eIMAuqSTToepZh3-4L8aVV:APA91bHgsjPrZjDAq-NjV_vA3k3KXyuqPbgtCengaanMBlMyz-Ag3_-wYpMYdgcQ4SQNUJwRwLkTZGHx7lCjw4FLtNMSP-8ZSUNtXligMA9CQzrRm-0XkZ1-ngcLfViBm59xnyQB5xpe';
+$deviceToken = 'fQuljixAQxihhuomlOu8fn:APA91bFgVGlb5-emYVHQbD70BVCZUSiUsavbbX7RP0ZhkbQ8ABp-Ff9rmVy6LlhxbblvvB-XSm6jiDh8bS8vA8kLYnMVb3cWCV-9KS6vT-M7-trPs1ECky5h2Cs9uyMk6Ky-uhmh_JEc';
 
 
 function crearCabecera($claveServer) {
